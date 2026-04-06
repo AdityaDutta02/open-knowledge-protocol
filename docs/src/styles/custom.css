@@ -1,0 +1,26 @@
+:root {
+  --sl-color-accent: #FFB000;
+  --sl-color-accent-high: #cc8c00;
+}
+
+/* Paper page: academic typeset */
+.paper-page {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  max-width: 72ch;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  text-align: justify;
+  hyphens: auto;
+  counter-reset: section;
+}
+
+.paper-page h1 { font-size: 1.8rem; text-align: center; font-weight: 600; }
+.paper-page h2 { font-size: 1.3rem; counter-increment: section; }
+.paper-page h2::before { content: counter(section) ". "; }
+
+@media print {
+  header, nav, footer, .sl-sidebar { display: none !important; }
+  .paper-page { max-width: 100%; padding: 0; }
+}
