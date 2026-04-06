@@ -1,0 +1,37 @@
+[
+  {
+    "id": "mh-001",
+    "question": "What technique enables in-context learning, given that attention is a prerequisite for transformers?",
+    "requires_hops": 2,
+    "expected_concept_path": ["attention-mechanisms", "transformer-architecture", "in-context-learning"],
+    "ground_truth": "Few-shot prompting enables in-context learning by leveraging the attention mechanism's ability to relate query tokens to demonstrated examples within the context window."
+  },
+  {
+    "id": "mh-002",
+    "question": "If RAG accuracy drops on multi-hop queries, what OKP structure specifically addresses this limitation?",
+    "requires_hops": 2,
+    "expected_concept_path": ["rag-limitations", "knowledge-graph-rag", "okp-concept-graph"],
+    "ground_truth": "OKP's ConceptGraph with typed edges enables agents to traverse prerequisite chains and enables relationships, providing structured multi-hop context that vector RAG cannot."
+  },
+  {
+    "id": "mh-003",
+    "question": "What must a developer understand about MCP before implementing OKP on top of it?",
+    "requires_hops": 2,
+    "expected_concept_path": ["mcp-protocol", "mcp-tool-invocation", "okp-transport-profile"],
+    "ground_truth": "MCP defines how to expose tools via JSON-RPC. OKP defines the knowledge payload those tools return. Understanding MCP tool schemas is prerequisite to implementing the 5 standard OKP tools."
+  },
+  {
+    "id": "mh-004",
+    "question": "Given that ConceptDNA encodes prerequisite relationships, how does an AI agent determine the correct reading order for a multi-article learning path on transformer architectures?",
+    "requires_hops": 3,
+    "expected_concept_path": ["concept-dna", "prerequisite-edges", "transformer-architecture", "learning-path-traversal"],
+    "ground_truth": "An agent queries get_prerequisites(conceptId) transitively via the OKP MCP server, which returns prerequisite chains encoded as ConceptGraph edges. Topological sort of the resulting subgraph yields the optimal reading order."
+  },
+  {
+    "id": "mh-005",
+    "question": "How does OKP's confidence field help an agent determine whether to cite an article that was published 18 months ago and marked with reviewBy set to 12 months ago?",
+    "requires_hops": 2,
+    "expected_concept_path": ["temporal-validity", "confidence-levels", "agent-citation-policy"],
+    "ground_truth": "OKP's temporalValidity.reviewBy field signals when content should be re-evaluated. If reviewBy is past, the agent should treat the article's confidence as potentially degraded — even if confidence is set to 'current' — and either flag it or seek more recent sources."
+  }
+]
