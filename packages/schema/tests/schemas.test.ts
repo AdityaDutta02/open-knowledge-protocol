@@ -148,18 +148,29 @@ describe('ConceptGraphSchema', () => {
 });
 
 describe('buildJsonLd', () => {
+  const testDNA: ConceptDNA = {
+    conceptId: 'test',
+    title: 'Test Article',
+    summary: 'A test article.',
+    keyTerms: ['test'],
+    prerequisites: [],
+    enables: [],
+    relatedTo: [],
+    category: 'test',
+    confidence: 'current',
+    temporalValidity: { publishedAt: '2024-01-01T00:00:00.000Z' },
+    articleType: 'primer',
+  };
+
   it('wraps ConceptDNA in a valid JSON-LD structure', () => {
-    const result = buildJsonLd(
-      { conceptId: 'test', title: 'Test Article' },
-      'https://example.com/test',
-    );
+    const result = buildJsonLd(testDNA, 'https://example.com/test');
     expect(result['@context']).toContain(OKP_CONTEXT);
     expect(result['@id']).toBe('https://example.com/test');
     expect((result['@type'] as string[]).includes('okp:KnowledgeDocument')).toBe(true);
   });
 
   it('spreads conceptDNA fields onto the root object', () => {
-    const result = buildJsonLd({ conceptId: 'test' }, 'https://example.com/test');
+    const result = buildJsonLd(testDNA, 'https://example.com/test');
     expect(result['conceptId']).toBe('test');
   });
 });

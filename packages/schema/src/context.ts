@@ -1,3 +1,5 @@
+import type { ConceptDNA } from './types.js';
+
 /**
  * JSON-LD @context for Open Knowledge Protocol.
  * Embed this in any JSON-LD block alongside schema.org/Article to add OKP semantics.
@@ -9,7 +11,7 @@ export const OKP_CONTEXT = {
   xsd: 'http://www.w3.org/2001/XMLSchema#',
   conceptId: 'okp:conceptId',
   summary: 'okp:summary',
-  keyTerms: 'okp:keyTerms',
+  keyTerms: { '@id': 'okp:keyTerms', '@container': '@set' },
   prerequisites: { '@id': 'okp:prerequisite', '@type': '@id' },
   enables: { '@id': 'okp:enables', '@type': '@id' },
   relatedTo: { '@id': 'okp:relatedTo', '@type': '@id' },
@@ -18,6 +20,8 @@ export const OKP_CONTEXT = {
   confidence: 'okp:confidence',
   temporalValidity: 'okp:temporalValidity',
   articleType: 'okp:articleType',
+  title: 'schema:name',
+  category: 'okp:category',
   publishedAt: { '@id': 'schema:datePublished', '@type': 'xsd:dateTime' },
   reviewBy: { '@id': 'okp:reviewBy', '@type': 'xsd:dateTime' },
   expiresAt: { '@id': 'okp:expiresAt', '@type': 'xsd:dateTime' },
@@ -31,7 +35,7 @@ export type OKPContext = typeof OKP_CONTEXT;
  * trusted server-side CMS data, not user input.
  */
 export function buildJsonLd(
-  conceptDNA: Record<string, unknown>,
+  conceptDNA: ConceptDNA,
   articleUrl: string,
 ): Record<string, unknown> {
   return {
