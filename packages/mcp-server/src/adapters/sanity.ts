@@ -30,7 +30,7 @@ function buildSearchGroq(): string {
     `*[_type == "post" && defined(conceptDNA) && (` +
     `title match $query + "*" || ` +
     `conceptDNA.summary match $query + "*" || ` +
-    `$query in conceptDNA.keyTerms` +
+    `conceptDNA.keyTerms[] match $query + "*"` +
     `)] | order(publishedAt desc) [0...10] ${nodeProjection()}`
   );
 }
@@ -45,7 +45,7 @@ function buildGetRelatedGroq(): string {
     `$conceptId in conceptDNA.prerequisites || ` +
     `$conceptId in conceptDNA.enables || ` +
     `$conceptId in conceptDNA.relatedTo` +
-    `)] [0...10] ${nodeProjection()}`
+    `)] | order(publishedAt desc) [0...10] ${nodeProjection()}`
   );
 }
 
@@ -149,7 +149,12 @@ export class SanityAdapter implements CMSAdapter {
       const current = queue.shift();
       if (!current) break;
 
-      const node = await this.getArticle(current.id);
+      let node: KnowledgeNode | null;
+      try {
+        node = await this.getArticle(current.id);
+      } catch {
+        continue; // skip unreachable nodes, don't abort graph
+      }
       if (!node) continue;
 
       nodes.push(node);

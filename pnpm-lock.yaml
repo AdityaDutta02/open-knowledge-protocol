@@ -30,7 +30,7 @@ importers:
         specifier: workspace:*
         version: link:../schema
       '@sanity/client':
-        specifier: ^7.20.0
+        specifier: '>=3.0.0'
         version: 7.20.0
       zod:
         specifier: ^3.23.0

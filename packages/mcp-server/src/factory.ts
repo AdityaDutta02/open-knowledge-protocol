@@ -71,39 +71,47 @@ export function createOKPServer(config: OKPServerConfig): Server {
   server.setRequestHandler(CallToolRequestSchema, async (request) => {
     const { name, arguments: args } = request.params;
 
-    switch (name) {
-      case 'search_articles': {
-        const nodes = await handleSearchArticles(config.adapter, args);
-        return { content: [{ type: 'text', text: JSON.stringify(nodes, null, 2) }] };
-      }
-      case 'get_article': {
-        const node = await handleGetArticle(config.adapter, args);
-        if (!node) {
+    try {
+      switch (name) {
+        case 'search_articles': {
+          const nodes = await handleSearchArticles(config.adapter, args);
+          return { content: [{ type: 'text', text: JSON.stringify(nodes, null, 2) }] };
+        }
+        case 'get_article': {
           const { conceptId } = ConceptIdInputSchema.parse(args);
+          const node = await config.adapter.getArticle(conceptId);
+          if (!node) {
+            return {
+              content: [{ type: 'text', text: `No article found with conceptId: ${conceptId}` }],
+              isError: true,
+            };
+          }
+          return { content: [{ type: 'text', text: JSON.stringify(node, null, 2) }] };
+        }
+        case 'get_related': {
+          const nodes = await handleGetRelated(config.adapter, args);
+          return { content: [{ type: 'text', text: JSON.stringify(nodes, null, 2) }] };
+        }
+        case 'get_prerequisites': {
+          const chain = await handleGetPrerequisites(config.adapter, args);
+          return { content: [{ type: 'text', text: JSON.stringify(chain, null, 2) }] };
+        }
+        case 'get_graph': {
+          const graph = await handleGetGraph(config.adapter, args);
+          return { content: [{ type: 'text', text: JSON.stringify(graph, null, 2) }] };
+        }
+        default:
           return {
-            content: [{ type: 'text', text: `No article found with conceptId: ${conceptId}` }],
+            content: [{ type: 'text', text: `Unknown tool: ${name}` }],
             isError: true,
           };
-        }
-        return { content: [{ type: 'text', text: JSON.stringify(node, null, 2) }] };
       }
-      case 'get_related': {
-        const nodes = await handleGetRelated(config.adapter, args);
-        return { content: [{ type: 'text', text: JSON.stringify(nodes, null, 2) }] };
-      }
-      case 'get_prerequisites': {
-        const chain = await handleGetPrerequisites(config.adapter, args);
-        return { content: [{ type: 'text', text: JSON.stringify(chain, null, 2) }] };
-      }
-      case 'get_graph': {
-        const graph = await handleGetGraph(config.adapter, args);
-        return { content: [{ type: 'text', text: JSON.stringify(graph, null, 2) }] };
-      }
-      default:
-        return {
-          content: [{ type: 'text', text: `Unknown tool: ${name}` }],
-          isError: true,
-        };
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      return {
+        content: [{ type: 'text', text: `Tool error: ${message}` }],
+        isError: true,
+      };
     }
   });
 
