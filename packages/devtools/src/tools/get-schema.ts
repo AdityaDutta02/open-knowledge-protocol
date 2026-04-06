@@ -1,4 +1,4 @@
-type SchemaEntity = 'ConceptDNA' | 'Article' | 'Prediction' | 'KnowledgeNode' | 'ConceptGraph';
+export type SchemaEntity = 'ConceptDNA' | 'Article' | 'Prediction' | 'KnowledgeNode' | 'ConceptGraph';
 
 const SCHEMA_DOCS: Record<SchemaEntity, string> = {
   ConceptDNA: `## ConceptDNA -- Zod Schema (@okp/schema)

@@ -7,6 +7,7 @@ export default defineConfig([
     dts: true,
     sourcemap: true,
     clean: true,
+    loader: { '.md': 'copy' },
     external: ['@okp/schema', '@okp/validate'],
   },
   {
