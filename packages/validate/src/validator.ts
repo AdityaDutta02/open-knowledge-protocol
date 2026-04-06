@@ -1,4 +1,4 @@
-import type { ConceptDNA } from '@okp/schema';
+import { ConceptDNASchema } from '@okp/schema';
 import {
   checkSemanticIdentity,
   checkRelationalContext,
@@ -39,19 +39,23 @@ const NO_DNA_DIMENSIONS: DimensionResult[] = [
 
 /**
  * Validate OKP compliance of a site URL.
- * Fetches the page, extracts ConceptDNA, and scores across 5 dimensions.
+ * Fetches the page, extracts ConceptDNA from JSON-LD, and scores across 5 dimensions.
  */
 export async function validate(url: string): Promise<ComplianceReport> {
   const data = await fetchOKPData(url);
-  const full = data.conceptDNA as ConceptDNA;
 
-  const dimensions: DimensionResult[] = data.conceptDNA
+  // Validate the partial via Zod to ensure all required fields are present before
+  // passing to dimension checkers. The cast to ConceptDNA is safe here because
+  // safeParse guarantees structural validity; the cast resolves the exactOptionalPropertyTypes
+  // mismatch between Zod's inferred type (string | undefined) and the ConceptDNA interface.
+  const parsed = ConceptDNASchema.safeParse(data.conceptDNA);
+  const dimensions: DimensionResult[] = parsed.success
     ? [
-        checkSemanticIdentity(full),
-        checkRelationalContext(full),
-        checkTemporalValidity(full),
-        checkConfidenceMetadata(full),
-        checkGraphConnectivity(full),
+        checkSemanticIdentity(parsed.data as import('@okp/schema').ConceptDNA),
+        checkRelationalContext(parsed.data as import('@okp/schema').ConceptDNA),
+        checkTemporalValidity(parsed.data as import('@okp/schema').ConceptDNA),
+        checkConfidenceMetadata(parsed.data as import('@okp/schema').ConceptDNA),
+        checkGraphConnectivity(parsed.data as import('@okp/schema').ConceptDNA),
       ]
     : NO_DNA_DIMENSIONS;
 

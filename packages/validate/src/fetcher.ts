@@ -42,7 +42,12 @@ export async function fetchOKPData(siteUrl: string): Promise<FetchedOKPData> {
       try {
         const parsed = JSON.parse(match[1] ?? '') as Record<string, unknown>;
         jsonLdBlocks.push(parsed);
-        if (typeof parsed['conceptId'] === 'string') {
+        // Identify OKP ConceptDNA by checking both conceptId and the @context or @type
+        // to avoid false matches with other JSON-LD schemas that happen to use 'conceptId'
+        if (
+          typeof parsed['conceptId'] === 'string' &&
+          (String(parsed['@context'] ?? '').includes('okp') || parsed['@type'] === 'ConceptDNA')
+        ) {
           conceptDNA = parsed as Partial<ConceptDNA>;
         }
       } catch {
