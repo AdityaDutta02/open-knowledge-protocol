@@ -7,15 +7,14 @@ export default defineConfig([
     dts: true,
     sourcemap: true,
     clean: true,
-    loader: { '.md': 'copy' },
+    loader: { '.md': 'text' },
     external: ['@okp/schema', '@okp/validate'],
   },
   {
     entry: ['src/cli.ts'],
     format: ['esm'],
-    dts: true,
     sourcemap: true,
-    loader: { '.md': 'copy' },
+    loader: { '.md': 'text' },
     external: ['@okp/schema', '@okp/validate'],
   },
 ]);

@@ -5,24 +5,27 @@ import {
 } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 import { getToolDefinitions } from './tool-definitions.js';
-import { getQuickstart } from './tools/get-quickstart.js';
+import { getQuickstart, type SupportedStack } from './tools/get-quickstart.js';
 import { scaffoldConceptDNA } from './tools/scaffold-concept-dna.js';
-import { getSchemaForEntity } from './tools/get-schema.js';
+import { getSchemaForEntity, type SchemaEntity } from './tools/get-schema.js';
 import { generateMcpConfig } from './tools/generate-mcp-config.js';
 import { validateImplementation } from './tools/validate-impl.js';
+import type { ArticleType } from '@okp/schema';
+
+type CMSType = 'sanity' | 'contentful';
 
 async function dispatchTool(name: string, a: Record<string, unknown>): Promise<string> {
   switch (name) {
     case 'get_quickstart':
-      return getQuickstart(z.string().parse(a['stack']) as never);
+      return getQuickstart(z.string().parse(a['stack']) as SupportedStack);
     case 'scaffold_concept_dna':
-      return scaffoldConceptDNA(z.string().parse(a['articleType']) as never);
+      return scaffoldConceptDNA(z.string().parse(a['articleType']) as ArticleType);
     case 'get_schema':
-      return getSchemaForEntity(z.string().parse(a['entity']) as never);
+      return getSchemaForEntity(z.string().parse(a['entity']) as SchemaEntity);
     case 'validate_implementation':
       return validateImplementation(z.string().url().parse(a['url']));
     case 'generate_mcp_config':
-      return generateMcpConfig(z.string().parse(a['cms']) as never, z.string().url().parse(a['siteUrl']));
+      return generateMcpConfig(z.string().parse(a['cms']) as CMSType, z.string().url().parse(a['siteUrl']));
     default:
       throw new Error(`Unknown tool: ${name}`);
   }

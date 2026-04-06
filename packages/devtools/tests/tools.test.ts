@@ -3,6 +3,7 @@ import { getQuickstart } from '../src/tools/get-quickstart.js';
 import { scaffoldConceptDNA } from '../src/tools/scaffold-concept-dna.js';
 import { getSchemaForEntity } from '../src/tools/get-schema.js';
 import { generateMcpConfig } from '../src/tools/generate-mcp-config.js';
+import { validateImplementation } from '../src/tools/validate-impl.js';
 
 describe('getQuickstart', () => {
   it('returns quickstart content for nextjs-sanity', () => {
@@ -46,5 +47,13 @@ describe('generateMcpConfig', () => {
     const result = generateMcpConfig('sanity', 'https://example.com');
     const config = JSON.parse(result) as { mcpServers: { okp: { command: string } } };
     expect(config.mcpServers.okp.command).toBe('node');
+  });
+});
+
+describe('validateImplementation', () => {
+  it('returns install instructions when @okp/validate is not available', async () => {
+    // @okp/validate is not in devtools dependencies — dynamic import will fail gracefully
+    const result = await validateImplementation('https://example.com');
+    expect(result).toContain('@okp/validate');
   });
 });
