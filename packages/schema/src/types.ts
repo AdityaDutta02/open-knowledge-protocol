@@ -28,7 +28,7 @@ export interface Prediction {
   claim: string;
   /** ISO 8601 datetime -- target resolution date */
   targetDate: string;
-  /** Author's confidence in this prediction, 0-1 */
+  /** Author's confidence in this prediction. Must be in range [0, 1]. Enforced at runtime by ConceptDNASchema (Zod). */
   confidence: number;
   status: 'pending' | 'correct' | 'incorrect' | 'retracted';
   /** ISO 8601 datetime -- when the prediction was resolved */
@@ -84,7 +84,9 @@ export interface KnowledgeNode {
 }
 
 export interface ConceptEdge {
+  /** The source conceptId */
   from: string;
+  /** The target conceptId */
   to: string;
   type: EdgeType;
   /** Strength of relationship, 0-1. Defaults to 1 if omitted. */
