@@ -1,5 +1,6 @@
 ---
 import HomePage from '../components/HomePage';
+import '../styles/homepage.css';
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -17,14 +18,6 @@ import HomePage from '../components/HomePage';
       href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,400;1,6..72,500&family=Inter:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <style>
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-      html, body { background: #191034; }
-      a { cursor: pointer; }
-      @media (max-width: 640px) {
-        nav > div > a:not(:last-child) { display: none; }
-      }
-    </style>
   </head>
   <body>
     <HomePage client:load />

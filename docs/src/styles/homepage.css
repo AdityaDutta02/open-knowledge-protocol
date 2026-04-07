@@ -1,0 +1,7 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #191034; }
+a { cursor: pointer; }
+@media (max-width: 640px) {
+  nav > div > a { display: none; }
+  nav > div > a:last-child { display: inline; }
+}
