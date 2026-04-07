@@ -1,0 +1,32 @@
+---
+import HomePage from '../components/HomePage';
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Open Knowledge Protocol</title>
+    <meta
+      name="description"
+      content="Open standard for structuring web content as a queryable knowledge source for AI agents."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,400;1,6..72,500&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { background: #191034; }
+      a { cursor: pointer; }
+      @media (max-width: 640px) {
+        nav > div > a:not(:last-child) { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <HomePage client:load />
+  </body>
+</html>
