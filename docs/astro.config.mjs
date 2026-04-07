@@ -1,9 +1,11 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://okp.theadityadutta.com',
   integrations: [
+    react(),
     starlight({
       title: 'Open Knowledge Protocol',
       description: 'Open standard for structuring web content as a queryable knowledge source for AI agents.',
