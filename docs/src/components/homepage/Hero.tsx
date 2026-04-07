@@ -1,4 +1,10 @@
+import { motion } from 'framer-motion';
 import { SERIF } from './tokens';
+
+const lineVariants = {
+  hidden: { opacity: 0, y: 60, filter: 'blur(8px)' },
+  visible: { opacity: 1, y: 0, filter: 'blur(0px)' },
+};
 
 export default function Hero(): JSX.Element {
   return (
@@ -17,7 +23,13 @@ export default function Hero(): JSX.Element {
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
         {/* Line 1 — italic serif */}
-        <div className="anim-hero-1" style={{ overflow: 'hidden' }}>
+        <motion.div
+          style={{ overflow: 'hidden' }}
+          variants={lineVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+        >
           <h1
             style={{
               fontFamily: SERIF,
@@ -33,11 +45,14 @@ export default function Hero(): JSX.Element {
           >
             The knowledge layer
           </h1>
-        </div>
+        </motion.div>
 
         {/* Line 2 — with bobbing emoji */}
-        <div
-          className="anim-hero-2"
+        <motion.div
+          variants={lineVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -57,8 +72,9 @@ export default function Hero(): JSX.Element {
           >
             for the
           </span>
-          <span
-            className="anim-bob"
+          <motion.span
+            animate={{ y: [0, -8, 4, 0], rotate: [0, -3, 2, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
             style={{
               fontSize: 'clamp(45px, 7.5vw, 110px)',
               userSelect: 'none',
@@ -67,7 +83,7 @@ export default function Hero(): JSX.Element {
             aria-hidden="true"
           >
             🧠
-          </span>
+          </motion.span>
           <span
             style={{
               fontFamily: SERIF,
@@ -80,10 +96,15 @@ export default function Hero(): JSX.Element {
           >
             agentic
           </span>
-        </div>
+        </motion.div>
 
         {/* Line 3 */}
-        <div className="anim-hero-3">
+        <motion.div
+          variants={lineVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
+        >
           <span
             style={{
               fontFamily: SERIF,
@@ -96,7 +117,7 @@ export default function Hero(): JSX.Element {
           >
             web.
           </span>
-        </div>
+        </motion.div>
 
       </div>
     </section>

@@ -1,8 +1,12 @@
+import { motion } from 'framer-motion';
 import { SANS } from './tokens';
 
 export default function Footer(): JSX.Element {
   return (
-    <footer
+    <motion.footer
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1.2, duration: 0.6 }}
       style={{
         borderTop: '1px solid rgba(28,30,33,0.12)',
         padding: '24px 32px',
@@ -41,6 +45,6 @@ export default function Footer(): JSX.Element {
       >
         GitHub →
       </a>
-    </footer>
+    </motion.footer>
   );
 }

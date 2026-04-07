@@ -1,9 +1,12 @@
+import { motion } from 'framer-motion';
 import { SERIF, SANS } from './tokens';
 
 export default function NavBar(): JSX.Element {
   return (
-    <nav
-      className="anim-nav"
+    <motion.nav
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       style={{
         position: 'sticky',
         top: 0,
@@ -50,8 +53,15 @@ export default function NavBar(): JSX.Element {
             label="GitHub"
             external
           />
-          <span
-            className="anim-pill-glow"
+          <motion.span
+            animate={{
+              boxShadow: [
+                '0 0 0 0 rgba(228,107,57,0)',
+                '0 0 16px 4px rgba(228,107,57,0.25)',
+                '0 0 0 0 rgba(228,107,57,0)',
+              ],
+            }}
+            transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
             style={{
               background: '#e46b39',
               color: '#ffffff',
@@ -64,10 +74,10 @@ export default function NavBar(): JSX.Element {
             }}
           >
             v0.1.0
-          </span>
+          </motion.span>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }
 
@@ -83,10 +93,12 @@ function NavLink({ href, label, external = false }: NavLinkProps): JSX.Element {
     : {};
 
   return (
-    <a
+    <motion.a
       href={href}
       {...extraProps}
       className="nav-link-group"
+      whileHover={{ color: '#e46b39' }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       style={{
         fontFamily: SANS,
         fontSize: 16,
@@ -99,13 +111,11 @@ function NavLink({ href, label, external = false }: NavLinkProps): JSX.Element {
       }}
       onMouseEnter={(e) => {
         const anchor = e.currentTarget as HTMLAnchorElement;
-        anchor.style.color = '#e46b39';
         const bar = anchor.querySelector('.nav-underline') as HTMLSpanElement | null;
         if (bar) bar.style.width = '100%';
       }}
       onMouseLeave={(e) => {
         const anchor = e.currentTarget as HTMLAnchorElement;
-        anchor.style.color = '#1c1e21';
         const bar = anchor.querySelector('.nav-underline') as HTMLSpanElement | null;
         if (bar) bar.style.width = '0%';
       }}
@@ -123,6 +133,6 @@ function NavLink({ href, label, external = false }: NavLinkProps): JSX.Element {
           transition: 'width 0.3s ease',
         }}
       />
-    </a>
+    </motion.a>
   );
 }

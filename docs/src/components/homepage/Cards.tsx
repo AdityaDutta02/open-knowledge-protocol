@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { SERIF, SANS, MONO } from './tokens';
 
 // Inline SVG icons (lucide-react not installed)
@@ -78,16 +79,25 @@ function IconCheck({ size = 18 }: { size?: number }): JSX.Element {
   );
 }
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.97 },
+  visible: { opacity: 1, y: 0, scale: 1 },
+};
+
 // Card 1 — Open Standard (gray)
 function CardOpenStandard(): JSX.Element {
   return (
-    <a
+    <motion.a
       href="/why-okp"
-      className="card-hover anim-card-1"
       data-testid="card-open-standard"
+      variants={cardVariants}
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.7 }}
+      whileHover={{ y: -6, scale: 1.015, boxShadow: '0 20px 40px -12px rgba(0,0,0,0.15)' }}
       style={{
         width: '100%',
-        maxWidth: 500,
+        maxWidth: 480,
         height: 350,
         background: '#e5e5eb',
         borderRadius: 24,
@@ -151,7 +161,7 @@ function CardOpenStandard(): JSX.Element {
           <IconArrowUpRight size={20} />
         </p>
       </div>
-    </a>
+    </motion.a>
   );
 }
 
@@ -168,12 +178,16 @@ function CardStats(): JSX.Element {
   };
 
   return (
-    <div
-      className="card-hover anim-card-2"
+    <motion.div
       data-testid="card-stats"
+      variants={cardVariants}
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.85 }}
+      whileHover={{ y: -6, scale: 1.015, boxShadow: '0 20px 40px -12px rgba(0,0,0,0.15)' }}
       style={{
         width: '100%',
-        maxWidth: 500,
+        maxWidth: 480,
         height: 350,
         background: '#a7a7f5',
         borderRadius: 24,
@@ -211,10 +225,13 @@ function CardStats(): JSX.Element {
         >
           npm i @okp/schema
         </span>
-        <button
+        <motion.button
           onClick={handleCopy}
           aria-label={copied ? 'Copied!' : 'Copy install command'}
           data-testid="copy-button"
+          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 17 }}
           style={{
             background: 'none',
             border: 'none',
@@ -223,15 +240,6 @@ function CardStats(): JSX.Element {
             display: 'flex',
             alignItems: 'center',
             padding: 0,
-            transition: 'color 0.15s, transform 0.15s',
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.color = '#666';
-            (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1.1)';
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.color = '#1c1e21';
-            (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)';
           }}
         >
           {copied ? (
@@ -241,7 +249,7 @@ function CardStats(): JSX.Element {
           ) : (
             <IconCopy size={18} />
           )}
-        </button>
+        </motion.button>
       </div>
 
       {/* Stats */}
@@ -261,8 +269,9 @@ function CardStats(): JSX.Element {
       </div>
 
       {/* Decorative floating shapes */}
-      <div
-        className="anim-bob"
+      <motion.div
+        animate={{ y: [0, -8, 4, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
           bottom: -24,
@@ -289,7 +298,7 @@ function CardStats(): JSX.Element {
         }}
         aria-hidden="true"
       />
-    </div>
+    </motion.div>
   );
 }
 
@@ -331,12 +340,16 @@ function StatRow({ value, label }: StatRowProps): JSX.Element {
 // Card 3 — Feature highlight (orange)
 function CardFeature(): JSX.Element {
   return (
-    <div
-      className="card-hover anim-card-3"
+    <motion.div
       data-testid="card-feature"
+      variants={cardVariants}
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 1.0 }}
+      whileHover={{ y: -6, scale: 1.015, boxShadow: '0 20px 40px -12px rgba(0,0,0,0.15)' }}
       style={{
         width: '100%',
-        maxWidth: 450,
+        maxWidth: 480,
         height: 350,
         background: '#e46b39',
         borderRadius: 24,
@@ -366,8 +379,11 @@ function CardFeature(): JSX.Element {
         >
           ConceptDNA
         </h3>
-        <a
+        <motion.a
           href="/why-okp"
+          whileHover={{ scale: 1.05, background: '#ffffff', color: '#1c1e21' }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
           style={{
             background: '#1c1e21',
             color: '#ffffff',
@@ -377,24 +393,11 @@ function CardFeature(): JSX.Element {
             fontFamily: SANS,
             fontWeight: 700,
             textDecoration: 'none',
-            transition: 'background 0.2s, color 0.2s, transform 0.2s',
             display: 'inline-block',
-          }}
-          onMouseEnter={(e) => {
-            const el = e.currentTarget as HTMLAnchorElement;
-            el.style.background = '#ffffff';
-            el.style.color = '#1c1e21';
-            el.style.transform = 'scale(1.05)';
-          }}
-          onMouseLeave={(e) => {
-            const el = e.currentTarget as HTMLAnchorElement;
-            el.style.background = '#1c1e21';
-            el.style.color = '#ffffff';
-            el.style.transform = 'scale(1)';
           }}
         >
           Read spec
-        </a>
+        </motion.a>
       </div>
 
       <div style={{ position: 'relative', zIndex: 1 }}>
@@ -472,7 +475,7 @@ function CardFeature(): JSX.Element {
           style={{ width: 8, height: 8, borderRadius: '50%', background: 'rgba(255,255,255,0.5)' }}
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -485,15 +488,7 @@ export default function Cards(): JSX.Element {
         padding: '0 24px 80px',
       }}
     >
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 32,
-        }}
-        className="cards-row"
-        data-testid="cards-section"
-      >
+      <div className="cards-row" data-testid="cards-section">
         <CardOpenStandard />
         <CardStats />
         <CardFeature />

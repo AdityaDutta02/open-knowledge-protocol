@@ -14,12 +14,10 @@ export default function HomePage(): JSX.Element {
         overflow: 'hidden',
       }}
     >
-      <div style={{ maxWidth: 1600, margin: '0 auto' }}>
-        <NavBar />
-        <Hero />
-        <Cards />
-        <Footer />
-      </div>
+      <NavBar />
+      <Hero />
+      <Cards />
+      <Footer />
     </div>
   );
 }
