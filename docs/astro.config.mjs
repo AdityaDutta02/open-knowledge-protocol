@@ -16,6 +16,8 @@ export default defineConfig({
         Header: './src/components/starlight/CustomHeader.astro',
         Sidebar: './src/components/starlight/CustomSidebar.astro',
         TableOfContents: './src/components/starlight/CustomTOC.astro',
+        PageTitle: './src/components/starlight/CustomPageTitle.astro',
+        MarkdownContent: './src/components/starlight/CustomMarkdownContent.astro',
       },
       sidebar: [
         { label: 'Why OKP', link: '/why-okp' },
