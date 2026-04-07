@@ -12,6 +12,11 @@ export default defineConfig({
       social: {
         github: 'https://github.com/AdityaDutta02/open-knowledge-protocol',
       },
+      components: {
+        Header: './src/components/starlight/CustomHeader.astro',
+        Sidebar: './src/components/starlight/CustomSidebar.astro',
+        TableOfContents: './src/components/starlight/CustomTOC.astro',
+      },
       sidebar: [
         { label: 'Why OKP', link: '/why-okp' },
         {

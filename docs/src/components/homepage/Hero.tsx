@@ -1,99 +1,104 @@
-import { motion } from 'framer-motion';
-import { TEXT, TEXT_MUTED, ACCENT, BORDER, SERIF, SANS, fadeUp, stagger } from './tokens';
+import { SERIF } from './tokens';
 
-export default function Hero() {
-  const lines = ['The web knows things.', "AI agents can't read it yet."];
-
+export default function Hero(): JSX.Element {
   return (
     <section
       style={{
-        maxWidth: 680,
-        margin: '0 auto',
-        padding: '120px 24px 80px',
-        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: 120,
+        paddingBottom: 60,
+        paddingLeft: 24,
+        paddingRight: 24,
       }}
     >
-      <motion.div variants={stagger(0)} initial="hidden" animate="visible">
-        {lines.map((line) => (
-          <motion.h1
-            key={line}
-            variants={fadeUp}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+        {/* Line 1 — italic serif */}
+        <div className="anim-hero-1" style={{ overflow: 'hidden' }}>
+          <h1
             style={{
               fontFamily: SERIF,
-              fontSize: 'clamp(32px, 5vw, 52px)',
-              fontWeight: 500,
-              letterSpacing: '-0.45px',
-              lineHeight: 1.2,
-              color: TEXT,
-              margin: '0 0 4px',
+              fontSize: 'clamp(60px, 10vw, 150px)',
+              fontWeight: 700,
+              lineHeight: 1.25,
+              letterSpacing: '-0.02em',
+              fontStyle: 'italic',
+              textAlign: 'center',
+              color: '#1c1e21',
+              margin: 0,
             }}
           >
-            {line}
-          </motion.h1>
-        ))}
+            The knowledge layer
+          </h1>
+        </div>
 
-        <motion.p
-          variants={fadeUp}
+        {/* Line 2 — with bobbing emoji */}
+        <div
+          className="anim-hero-2"
           style={{
-            fontFamily: SANS,
-            fontSize: 18,
-            color: TEXT_MUTED,
-            lineHeight: 1.75,
-            margin: '32px 0 40px',
-            fontWeight: 400,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 'clamp(12px, 2vw, 20px)',
           }}
         >
-          OKP is an open standard that structures your content into a graph AI
-          agents can query, traverse, and reason about — without scraping,
-          hallucinating, or guessing.
-        </motion.p>
+          <span
+            style={{
+              fontFamily: SERIF,
+              fontSize: 'clamp(60px, 10vw, 150px)',
+              fontWeight: 700,
+              lineHeight: 1.25,
+              letterSpacing: '-0.02em',
+              color: '#1c1e21',
+            }}
+          >
+            for the
+          </span>
+          <span
+            className="anim-bob"
+            style={{
+              fontSize: 'clamp(45px, 7.5vw, 110px)',
+              userSelect: 'none',
+              display: 'inline-block',
+            }}
+            aria-hidden="true"
+          >
+            🧠
+          </span>
+          <span
+            style={{
+              fontFamily: SERIF,
+              fontSize: 'clamp(60px, 10vw, 150px)',
+              fontWeight: 700,
+              lineHeight: 1.25,
+              letterSpacing: '-0.02em',
+              color: '#1c1e21',
+            }}
+          >
+            agentic
+          </span>
+        </div>
 
-        <motion.div
-          variants={fadeUp}
-          style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}
-        >
-          <motion.a
-            href="/spec/v0"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+        {/* Line 3 */}
+        <div className="anim-hero-3">
+          <span
             style={{
-              fontFamily: SANS,
-              fontSize: 15,
-              fontWeight: 500,
-              color: TEXT,
-              background: ACCENT,
-              padding: '11px 24px',
-              borderRadius: 8,
-              textDecoration: 'none',
-              display: 'inline-block',
-              boxShadow: '0 4px 14px rgba(112,44,221,0.4)',
+              fontFamily: SERIF,
+              fontSize: 'clamp(60px, 10vw, 150px)',
+              fontWeight: 700,
+              lineHeight: 1.25,
+              letterSpacing: '-0.02em',
+              color: '#1c1e21',
             }}
           >
-            Read the spec →
-          </motion.a>
-          <motion.a
-            href="/quickstart/nextjs-sanity"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-            style={{
-              fontFamily: SANS,
-              fontSize: 15,
-              fontWeight: 400,
-              color: TEXT_MUTED,
-              background: 'transparent',
-              border: `1px solid ${BORDER}`,
-              padding: '11px 24px',
-              borderRadius: 8,
-              textDecoration: 'none',
-              display: 'inline-block',
-            }}
-          >
-            Get started in 15 min →
-          </motion.a>
-        </motion.div>
-      </motion.div>
+            web.
+          </span>
+        </div>
+
+      </div>
     </section>
   );
 }

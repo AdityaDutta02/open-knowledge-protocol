@@ -1,17 +1,24 @@
-import { TEXT, TEXT_MUTED, BORDER, SANS } from './tokens';
+import { SANS } from './tokens';
 
-export default function Footer() {
+export default function Footer(): JSX.Element {
   return (
     <footer
       style={{
-        borderTop: `1px solid ${BORDER}`,
+        borderTop: '1px solid rgba(28,30,33,0.12)',
         padding: '24px 32px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
       }}
     >
-      <span style={{ fontFamily: SANS, fontSize: 14, color: TEXT_MUTED, fontWeight: 400 }}>
+      <span
+        style={{
+          fontFamily: SANS,
+          fontSize: 14,
+          color: '#6b6f75',
+          fontWeight: 400,
+        }}
+      >
         OKP is open source. MIT license.
       </span>
       <a
@@ -21,12 +28,16 @@ export default function Footer() {
         style={{
           fontFamily: SANS,
           fontSize: 14,
-          color: TEXT_MUTED,
+          color: '#6b6f75',
           textDecoration: 'none',
           transition: 'color 0.15s',
         }}
-        onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = TEXT)}
-        onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = TEXT_MUTED)}
+        onMouseEnter={(e) => {
+          (e.currentTarget as HTMLAnchorElement).style.color = '#1c1e21';
+        }}
+        onMouseLeave={(e) => {
+          (e.currentTarget as HTMLAnchorElement).style.color = '#6b6f75';
+        }}
       >
         GitHub →
       </a>
