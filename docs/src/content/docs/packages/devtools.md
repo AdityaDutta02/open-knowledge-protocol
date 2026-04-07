@@ -5,7 +5,7 @@ description: MCP server for AI coding assistants implementing OKP. Add to Claude
 
 # @okp/devtools
 
-An MCP server designed for developers implementing OKP. Add it to Claude Code, Cursor, or any MCP-compatible AI coding assistant once, and your AI assistant gains full knowledge of the OKP specification, schemas, and quickstart guides — without having to re-explain context in every session.
+An MCP server designed for developers implementing OKP. Add it to Claude Code, Cursor, or any MCP-compatible AI coding assistant once, and your AI assistant gains full knowledge of the OKP specification, schemas, and quickstart guides  -  without having to re-explain context in every session.
 
 ## Installation
 

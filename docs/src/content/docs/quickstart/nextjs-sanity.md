@@ -12,7 +12,7 @@ This guide walks through a complete OKP implementation in a Next.js 14+ App Rout
 - JSON-LD structured data on every article page
 - `/llms.txt` and `/llms-full.txt` served dynamically
 
-**Estimated time:** 15–20 minutes.
+**Estimated time:** 15 - 20 minutes.
 
 ## Prerequisites
 
@@ -78,7 +78,7 @@ export const conceptDNAField = defineField({
       type: 'array',
       of: [{ type: 'string' }],
       title: 'Related Concept IDs',
-      description: 'Laterally related concepts — neither prerequisite nor dependent.',
+      description: 'Laterally related concepts  -  neither prerequisite nor dependent.',
     }),
     defineField({
       name: 'category',
@@ -219,7 +219,7 @@ Aim for a Silver tier score (≥ 70) before launch. See [`@okp/validate`](/packa
 
 ## Next Steps
 
-- Fill in `reviewBy` and `expiresAt` in `temporalValidity` for all articles — this is the most common gap between Bronze and Silver tier
+- Fill in `reviewBy` and `expiresAt` in `temporalValidity` for all articles  -  this is the most common gap between Bronze and Silver tier
 - Add `predictions` arrays to forward-looking articles
 - Set up a Sanity webhook to auto-set `confidence: 'outdated'` when `reviewBy` passes
 - Deploy `@okp/devtools` to your Claude Code MCP config for in-editor OKP assistance

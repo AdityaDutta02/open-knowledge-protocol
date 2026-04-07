@@ -41,9 +41,9 @@ Composite Score: 74 / 100  [Silver]
 
   semantic-identity     92  PASS
   relational-context    80  PASS
-  temporal-validity     68  WARN  — missing expiresAt
+  temporal-validity     68  WARN   -  missing expiresAt
   confidence-metadata   85  PASS
-  graph-connectivity    45  WARN  — low edge degree (2 edges), no cross-publisher edges
+  graph-connectivity    45  WARN   -  low edge degree (2 edges), no cross-publisher edges
 
 Failing checks:
   - temporalValidity.expiresAt: field absent. Add an expiry date to complete temporal validity.
@@ -70,14 +70,14 @@ console.log(report.failingChecks);   // [{ field: 'temporalValidity.expiresAt', 
 ```typescript
 interface ComplianceReport {
   url: string;
-  compositeScore: number;        // 0–100 arithmetic mean of five dimensions
+  compositeScore: number;        // 0 - 100 arithmetic mean of five dimensions
   tier: 'none' | 'bronze' | 'silver' | 'gold';
   dimensions: {
-    semanticIdentity: number;    // 0–100
-    relationalContext: number;   // 0–100
-    temporalValidity: number;    // 0–100
-    confidenceMetadata: number;  // 0–100
-    graphConnectivity: number;   // 0–100
+    semanticIdentity: number;    // 0 - 100
+    relationalContext: number;   // 0 - 100
+    temporalValidity: number;    // 0 - 100
+    confidenceMetadata: number;  // 0 - 100
+    graphConnectivity: number;   // 0 - 100
   };
   failingChecks: Array<{
     dimension: string;
@@ -108,7 +108,7 @@ interface ComplianceReport {
 | Silver | ≥ 70 | Required fields present, temporal validity complete, multiple edge types |
 | Gold | ≥ 90 | All required and most optional fields, rich graph connectivity, regular `confidence` updates |
 
-A missing `conceptId` is a categorical failure — it prevents graph traversal entirely and will score the `semantic-identity` dimension at 0 regardless of other fields. The composite score is a summary metric; review dimension-level scores for a complete picture.
+A missing `conceptId` is a categorical failure  -  it prevents graph traversal entirely and will score the `semantic-identity` dimension at 0 regardless of other fields. The composite score is a summary metric; review dimension-level scores for a complete picture.
 
 ## CI Integration
 

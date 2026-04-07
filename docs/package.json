@@ -4,9 +4,9 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "dev": "NODE_OPTIONS=--no-experimental-strip-types astro dev",
+    "build": "NODE_OPTIONS=--no-experimental-strip-types astro build",
+    "preview": "NODE_OPTIONS=--no-experimental-strip-types astro preview"
   },
   "dependencies": {
     "@astrojs/react": "^5.0.3",

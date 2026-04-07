@@ -6,13 +6,19 @@
 
 ## The Problem
 
-AI agents consume web content as scraped HTML — unstructured, context-free, and semantically opaque. They cannot answer "what does this article assume you already know?", "is this information still current?", or "how does this concept relate to adjacent ideas?" Without a shared vocabulary for knowledge structure, every crawler, every RAG pipeline, and every AI assistant must reinvent the same fragile extraction heuristics. OKP gives every article a semantic identity that any agent can read, reason over, and trust.
+AI agents read the web as raw HTML. They can't tell what a page means, whether it's still accurate, or how one concept connects to another. Every RAG pipeline and AI assistant has to guess. OKP adds a structured metadata layer - a JSON-LD block on each page - that any agent can parse without scraping.
 
 ---
 
-## What OKP Is
+## Get Started
 
-OKP (Open Knowledge Protocol) is an open standard for structuring web content so AI agents can treat it as a primary, queryable knowledge source — not a last resort scrape. It defines three core primitives: **ConceptDNA** (the semantic fingerprint of a piece of content), **KnowledgeNode** (a graph node connecting concepts across a site or across the web), and **ConceptGraph** (a traversable map of how ideas relate, depend on, and enable each other). These primitives are expressed as TypeScript interfaces, Zod schemas, and JSON-LD `@context` definitions that publish alongside your content. OKP is not a replacement for MCP or JSON-LD — it is the knowledge semantics layer that makes those transport and discovery layers meaningful.
+Add the schema package and drop a `ConceptDNA` block into any page:
+
+```bash
+npm add @okp/schema
+```
+
+For a full setup with an MCP server that lets AI agents query your site directly, follow the [Next.js + Sanity quickstart](https://okp.theadityadutta.com/quickstart/nextjs-sanity). Takes about 15 minutes. No new infrastructure required.
 
 ---
 
@@ -172,13 +178,13 @@ Point Claude Code or Cursor at your site's OKP MCP endpoint. In `~/.claude/setti
 }
 ```
 
-Your AI coder can now query your site's knowledge graph directly — asking which articles cover a topic, what prerequisites a concept has, or which posts are flagged for review.
+Your AI coder can now query your site's knowledge graph directly  -  asking which articles cover a topic, what prerequisites a concept has, or which posts are flagged for review.
 
 ---
 
 ## Compliance Tiers
 
-OKP compliance is scored 0–100 based on how completely a site implements the protocol. Run `npx okp validate <url>` to check any site.
+OKP compliance is scored 0 - 100 based on how completely a site implements the protocol. Run `npx okp validate <url>` to check any site.
 
 | Tier | Score | What it means |
 |------|-------|---------------|

@@ -59,7 +59,7 @@ const adapter = new SanityAdapter({
 });
 ```
 
-`SanityAdapter` uses GROQ queries to fetch `KnowledgeNode` objects from your Sanity dataset. It expects your documents to have a `conceptDNA` object field following the OKP schema — see the [Next.js + Sanity quickstart](/quickstart/nextjs-sanity) for the Sanity schema definition.
+`SanityAdapter` uses GROQ queries to fetch `KnowledgeNode` objects from your Sanity dataset. It expects your documents to have a `conceptDNA` object field following the OKP schema  -  see the [Next.js + Sanity quickstart](/quickstart/nextjs-sanity) for the Sanity schema definition.
 
 ## Usage: Next.js Route Handler
 

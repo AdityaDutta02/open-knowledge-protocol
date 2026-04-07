@@ -17,17 +17,17 @@ npm install @okp/schema
 
 ## What This Package Provides
 
-- **TypeScript interfaces** — `ConceptDNA`, `KnowledgeNode`, `ConceptGraph`, `ConceptEdge`, `Prediction`, `Citation`, and all supporting types, fully typed with no `any`
-- **Zod schemas** — `ConceptDNASchema`, `ArticleSchema`, `ConceptGraphSchema`, and per-field schemas for runtime validation of incoming data
-- **JSON-LD context** — `OKP_CONTEXT` defining the `@context` namespace for embedding ConceptDNA as structured linked data
-- **`buildJsonLd` utility** — transforms a `ConceptDNA` + URL into a valid JSON-LD object ready for embedding in a `<script type="application/ld+json">` tag
+- **TypeScript interfaces**  -  `ConceptDNA`, `KnowledgeNode`, `ConceptGraph`, `ConceptEdge`, `Prediction`, `Citation`, and all supporting types, fully typed with no `any`
+- **Zod schemas**  -  `ConceptDNASchema`, `ArticleSchema`, `ConceptGraphSchema`, and per-field schemas for runtime validation of incoming data
+- **JSON-LD context**  -  `OKP_CONTEXT` defining the `@context` namespace for embedding ConceptDNA as structured linked data
+- **`buildJsonLd` utility**  -  transforms a `ConceptDNA` + URL into a valid JSON-LD object ready for embedding in a `<script type="application/ld+json">` tag
 
 ## Key Exports
 
 | Export | Kind | Description |
 |--------|------|-------------|
-| `ConceptDNA` | Type | Core metadata envelope — the semantic identity of a knowledge article |
-| `KnowledgeNode` | Type | A `ConceptDNA` bound to a canonical URL — the atom of the OKP graph |
+| `ConceptDNA` | Type | Core metadata envelope  -  the semantic identity of a knowledge article |
+| `KnowledgeNode` | Type | A `ConceptDNA` bound to a canonical URL  -  the atom of the OKP graph |
 | `ConceptGraph` | Type | Multi-node subgraph with typed edges for traversal responses |
 | `ConceptEdge` | Type | Typed directed edge between two `conceptId` values |
 | `Prediction` | Type | Forward-looking claim with confidence score and resolution status |
@@ -42,7 +42,7 @@ npm install @okp/schema
 
 ### Validating incoming ConceptDNA
 
-Use `ConceptDNASchema.safeParse` to validate any object before using it as ConceptDNA — for example, when reading from a CMS API or parsing from a fetched page:
+Use `ConceptDNASchema.safeParse` to validate any object before using it as ConceptDNA  -  for example, when reading from a CMS API or parsing from a fetched page:
 
 ```typescript
 import { ConceptDNASchema } from '@okp/schema';
@@ -77,7 +77,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
 
   return (
     <>
-      {/* Embed structured data — content is from your own CMS, not user input */}
+      {/* Embed structured data  -  content is from your own CMS, not user input */}
       <script type="application/ld+json" suppressHydrationWarning>
         {jsonLdString}
       </script>

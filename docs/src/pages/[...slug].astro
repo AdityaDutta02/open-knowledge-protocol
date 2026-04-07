@@ -1,0 +1,30 @@
+---
+/**
+ * Workaround for Starlight + Node 25 / Astro 4.16 routing bug.
+ * Starlight's injected route evaluates `getCollection('docs')` at module-load time,
+ * before content virtual modules are ready, yielding 0 paths on Node 25.
+ * This override calls getCollection inside getStaticPaths() (correct timing).
+ */
+import { getCollection } from 'astro:content';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const docs = await getCollection('docs', ({ data }) => data.draft !== true);
+  return docs.map((entry) => {
+    const rawSlug = entry.slug === 'index' ? '' : entry.slug.replace(/\/index$/, '');
+    return {
+      params: { slug: rawSlug === '' ? undefined : rawSlug },
+      props: { entry },
+    };
+  });
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await entry.render();
+---
+
+<StarlightPage frontmatter={entry.data} headings={headings}>
+  <Content />
+</StarlightPage>

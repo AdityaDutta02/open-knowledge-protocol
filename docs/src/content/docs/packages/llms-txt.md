@@ -19,8 +19,8 @@ npm install @okp/llms-txt
 
 `generateLlmsTxt` takes an array of OKP articles and site metadata, and returns both the compact and full-text variants of the llms.txt format.
 
-- **`/llms.txt`** — A compact index: one line per article with title, URL, and summary. Fast to ingest for AI crawlers discovering your site.
-- **`/llms-full.txt`** — The full-content variant: complete article text with embedded ConceptDNA for each node, collocating structured metadata and prose in a single file.
+- **`/llms.txt`**  -  A compact index: one line per article with title, URL, and summary. Fast to ingest for AI crawlers discovering your site.
+- **`/llms-full.txt`**  -  The full-content variant: complete article text with embedded ConceptDNA for each node, collocating structured metadata and prose in a single file.
 
 ## API Reference
 
@@ -40,10 +40,10 @@ const result: LlmsTxtResult = generateLlmsTxt(articles, {
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `articles` | `Article[]` | Array of OKP articles — each must have `conceptDNA`, `slug`, and `body` fields |
-| `options.siteTitle` | `string` | Site name — used as `# Heading` in the output files |
+| `articles` | `Article[]` | Array of OKP articles  -  each must have `conceptDNA`, `slug`, and `body` fields |
+| `options.siteTitle` | `string` | Site name  -  used as `# Heading` in the output files |
 | `options.siteUrl` | `string` | Base URL (no trailing slash) for building article URLs |
-| `options.siteDescription` | `string` | Site description — used as the `> description` block |
+| `options.siteDescription` | `string` | Site description  -  used as the `> description` block |
 
 **Returns:** `LlmsTxtResult`
 

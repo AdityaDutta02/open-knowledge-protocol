@@ -7,7 +7,7 @@ description: Implement OKP in an Astro static site using Markdown or MDX content
 
 This guide walks through OKP implementation in an Astro project using file-based Markdown or MDX content collections. Since Astro generates static HTML, this approach uses build-time generation for all OKP outputs.
 
-**Estimated time:** 15–20 minutes.
+**Estimated time:** 15 - 20 minutes.
 
 ## Prerequisites
 
@@ -37,7 +37,7 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     pubDate: z.date(),
-    // Embed the full ConceptDNA schema — all fields are validated at build time
+    // Embed the full ConceptDNA schema  -  all fields are validated at build time
     conceptDNA: ConceptDNASchema,
   }),
 })

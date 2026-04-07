@@ -7,7 +7,7 @@ description: Implement OKP in a Next.js App Router project backed by Contentful 
 
 This guide walks through a complete OKP implementation in a Next.js 14+ App Router project using Contentful as the CMS.
 
-**Estimated time:** 15–20 minutes.
+**Estimated time:** 15 - 20 minutes.
 
 ## Prerequisites
 
@@ -168,9 +168,9 @@ export async function POST(req: NextRequest) {
 }
 ```
 
-## Steps 5–7
+## Steps 5 - 7
 
-Steps 5 through 7 (JSON-LD embedding, llms.txt generation, and AI assistant configuration) are identical to the Next.js + Sanity quickstart. See the [Next.js + Sanity guide](/quickstart/nextjs-sanity) for those steps — the `@okp/schema` and `@okp/llms-txt` packages are CMS-agnostic.
+Steps 5 through 7 (JSON-LD embedding, llms.txt generation, and AI assistant configuration) are identical to the Next.js + Sanity quickstart. See the [Next.js + Sanity guide](/quickstart/nextjs-sanity) for those steps  -  the `@okp/schema` and `@okp/llms-txt` packages are CMS-agnostic.
 
 ## Verify compliance
 
