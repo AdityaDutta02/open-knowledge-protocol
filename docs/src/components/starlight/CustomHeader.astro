@@ -1,0 +1,101 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+---
+
+<header class="okp-header" style="animation: slideDown 0.5s cubic-bezier(0.16,1,0.3,1) both;" data-testid="custom-header">
+  <a href="/" class="okp-header__logo" aria-label="OKP Home">
+    okp
+  </a>
+  <div class="okp-header__right">
+    <a
+      href="https://github.com/AdityaDutta02/open-knowledge-protocol"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="okp-header__github"
+      aria-label="View on GitHub"
+    >
+      GitHub
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="12"
+        height="12"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="okp-header__arrow-icon"
+        aria-hidden="true"
+      >
+        <line x1="7" y1="17" x2="17" y2="7"></line>
+        <polyline points="7 7 17 7 17 17"></polyline>
+      </svg>
+    </a>
+    <span class="okp-header__version">v0.1.0</span>
+  </div>
+</header>
+
+<style>
+  .okp-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    height: 56px;
+    border-bottom: 1px solid #e8e3de;
+    background: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    flex-shrink: 0;
+  }
+
+  .okp-header__logo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1c1e21;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .okp-header__logo:hover {
+    color: #1c1e21;
+  }
+
+  .okp-header__right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .okp-header__github {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+    color: #5a5550;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .okp-header__github:hover {
+    color: #e46b39;
+  }
+
+  .okp-header__arrow-icon {
+    flex-shrink: 0;
+  }
+
+  .okp-header__version {
+    font-size: 0.75rem;
+    color: #5a5550;
+    background: #f5f0eb;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+</style>

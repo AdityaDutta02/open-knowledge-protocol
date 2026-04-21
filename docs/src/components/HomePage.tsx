@@ -1,16 +1,21 @@
 import NavBar from './homepage/NavBar';
 import Hero from './homepage/Hero';
-import CodeSnippet from './homepage/CodeSnippet';
 import Cards from './homepage/Cards';
 import Footer from './homepage/Footer';
-import { BG, TEXT } from './homepage/tokens';
 
-export default function HomePage() {
+export default function HomePage(): JSX.Element {
   return (
-    <div style={{ background: BG, minHeight: '100vh', color: TEXT }}>
+    <div
+      className="grid-bg anim-grid-drift"
+      style={{
+        minHeight: '100dvh',
+        background: '#f6f6f6',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
       <NavBar />
       <Hero />
-      <CodeSnippet />
       <Cards />
       <Footer />
     </div>

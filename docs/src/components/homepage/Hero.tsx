@@ -1,99 +1,125 @@
 import { motion } from 'framer-motion';
-import { TEXT, TEXT_MUTED, ACCENT, BORDER, SERIF, SANS, fadeUp, stagger } from './tokens';
+import { SERIF } from './tokens';
 
-export default function Hero() {
-  const lines = ['The web knows things.', "AI agents can't read it yet."];
+const lineVariants = {
+  hidden: { opacity: 0, y: 60, filter: 'blur(8px)' },
+  visible: { opacity: 1, y: 0, filter: 'blur(0px)' },
+};
 
+export default function Hero(): JSX.Element {
   return (
     <section
       style={{
-        maxWidth: 680,
-        margin: '0 auto',
-        padding: '120px 24px 80px',
-        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: 120,
+        paddingBottom: 60,
+        paddingLeft: 24,
+        paddingRight: 24,
       }}
     >
-      <motion.div variants={stagger(0)} initial="hidden" animate="visible">
-        {lines.map((line) => (
-          <motion.h1
-            key={line}
-            variants={fadeUp}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+        {/* Line 1 — italic serif */}
+        <motion.div
+          style={{ overflow: 'hidden' }}
+          variants={lineVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+        >
+          <h1
             style={{
               fontFamily: SERIF,
-              fontSize: 'clamp(32px, 5vw, 52px)',
-              fontWeight: 500,
-              letterSpacing: '-0.45px',
-              lineHeight: 1.2,
-              color: TEXT,
-              margin: '0 0 4px',
+              fontSize: 'clamp(60px, 10vw, 150px)',
+              fontWeight: 700,
+              lineHeight: 1.25,
+              letterSpacing: '-0.02em',
+              fontStyle: 'italic',
+              textAlign: 'center',
+              color: '#1c1e21',
+              margin: 0,
             }}
           >
-            {line}
-          </motion.h1>
-        ))}
+            The knowledge layer
+          </h1>
+        </motion.div>
 
-        <motion.p
-          variants={fadeUp}
+        {/* Line 2 — with bobbing emoji */}
+        <motion.div
+          variants={lineVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
           style={{
-            fontFamily: SANS,
-            fontSize: 18,
-            color: TEXT_MUTED,
-            lineHeight: 1.75,
-            margin: '32px 0 40px',
-            fontWeight: 400,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 'clamp(12px, 2vw, 20px)',
           }}
         >
-          OKP is an open standard that structures your content into a graph AI
-          agents can query, traverse, and reason about — without scraping,
-          hallucinating, or guessing.
-        </motion.p>
-
-        <motion.div
-          variants={fadeUp}
-          style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}
-        >
-          <motion.a
-            href="/spec/v0"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+          <span
             style={{
-              fontFamily: SANS,
-              fontSize: 15,
-              fontWeight: 500,
-              color: TEXT,
-              background: ACCENT,
-              padding: '11px 24px',
-              borderRadius: 8,
-              textDecoration: 'none',
-              display: 'inline-block',
-              boxShadow: '0 4px 14px rgba(112,44,221,0.4)',
+              fontFamily: SERIF,
+              fontSize: 'clamp(60px, 10vw, 150px)',
+              fontWeight: 700,
+              lineHeight: 1.25,
+              letterSpacing: '-0.02em',
+              color: '#1c1e21',
             }}
           >
-            Read the spec →
-          </motion.a>
-          <motion.a
-            href="/quickstart/nextjs-sanity"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+            for the
+          </span>
+          <motion.span
+            animate={{ y: [0, -8, 4, 0], rotate: [0, -3, 2, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
             style={{
-              fontFamily: SANS,
-              fontSize: 15,
-              fontWeight: 400,
-              color: TEXT_MUTED,
-              background: 'transparent',
-              border: `1px solid ${BORDER}`,
-              padding: '11px 24px',
-              borderRadius: 8,
-              textDecoration: 'none',
+              fontSize: 'clamp(45px, 7.5vw, 110px)',
+              userSelect: 'none',
               display: 'inline-block',
             }}
+            aria-hidden="true"
           >
-            Get started in 15 min →
-          </motion.a>
+            🧠
+          </motion.span>
+          <span
+            style={{
+              fontFamily: SERIF,
+              fontSize: 'clamp(60px, 10vw, 150px)',
+              fontWeight: 700,
+              lineHeight: 1.25,
+              letterSpacing: '-0.02em',
+              color: '#1c1e21',
+            }}
+          >
+            agentic
+          </span>
         </motion.div>
-      </motion.div>
+
+        {/* Line 3 */}
+        <motion.div
+          variants={lineVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
+        >
+          <span
+            style={{
+              fontFamily: SERIF,
+              fontSize: 'clamp(60px, 10vw, 150px)',
+              fontWeight: 700,
+              lineHeight: 1.25,
+              letterSpacing: '-0.02em',
+              color: '#1c1e21',
+            }}
+          >
+            web.
+          </span>
+        </motion.div>
+
+      </div>
     </section>
   );
 }

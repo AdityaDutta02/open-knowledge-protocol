@@ -1,7 +1,284 @@
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { background: #191034; }
-a { cursor: pointer; }
-@media (max-width: 640px) {
-  nav > div > a { display: none; }
-  nav > div > a:last-child { display: inline; }
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #1c1e21;
+  background: #f6f6f6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(200, 160, 140, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 160, 140, 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+code, pre {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ============ KEYFRAME ANIMATIONS ============ */
+
+/* Nav slide down */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero text reveal — lift + blur */
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+/* Cards entrance */
+@keyframes floatUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Emoji gentle bob */
+@keyframes bob {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(-3deg);
+  }
+  75% {
+    transform: translateY(4px) rotate(2deg);
+  }
+}
+
+/* Dot pulse */
+@keyframes dotPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+}
+
+/* Version pill glow */
+@keyframes pillGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(228, 107, 57, 0);
+  }
+  50% {
+    box-shadow: 0 0 16px 4px rgba(228, 107, 57, 0.25);
+  }
+}
+
+/* Subtle shimmer for install bar */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Copy success pop */
+@keyframes popIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Grid background drift */
+@keyframes gridDrift {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 48px 48px, 48px 48px;
+  }
+}
+
+/* ============ ANIMATION UTILITY CLASSES ============ */
+
+.anim-nav {
+  animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.anim-hero-1 {
+  animation: revealUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.anim-hero-2 {
+  animation: revealUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+
+.anim-hero-3 {
+  animation: revealUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
+}
+
+.anim-card-1 {
+  animation: floatUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
+}
+
+.anim-card-2 {
+  animation: floatUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
+}
+
+.anim-card-3 {
+  animation: floatUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.0s both;
+}
+
+.anim-bob {
+  animation: bob 4s ease-in-out infinite;
+}
+
+.anim-pill-glow {
+  animation: pillGlow 3s ease-in-out infinite 1.5s;
+}
+
+.anim-pop {
+  animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.anim-grid-drift {
+  animation: gridDrift 30s linear infinite;
+}
+
+/* Dot stagger */
+.anim-dot-1 { animation: dotPulse 2.4s ease-in-out infinite 0s; }
+.anim-dot-2 { animation: dotPulse 2.4s ease-in-out infinite 0.3s; }
+.anim-dot-3 { animation: dotPulse 2.4s ease-in-out infinite 0.6s; }
+.anim-dot-4 { animation: dotPulse 2.4s ease-in-out infinite 0.9s; }
+
+/* ============ COMPONENT STYLES ============ */
+
+/* Card hover — translateY + scale */
+.card-hover {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.card-hover:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+}
+
+/* Badge hover wiggle */
+.badge-hover {
+  transition: transform 0.2s ease;
+}
+.badge-hover:hover {
+  transform: rotate(-3deg) scale(1.05);
+}
+
+/* Install bar shimmer */
+.install-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0.5) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Stat number hover scale */
+.stat-number {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.stat-number:hover {
+  transform: scale(1.08);
+}
+
+/* Arrow slide on group hover */
+.arrow-slide {
+  transition: transform 0.2s ease, gap 0.2s ease;
+}
+.group:hover .arrow-slide {
+  transform: translateX(4px);
+}
+
+/* Cards row — responsive flex */
+.cards-row {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .cards-row {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+
+/* ============ SCROLLBAR ============ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d1ccc7;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b8b3ae;
+}
+
+/* ============ REDUCED MOTION ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
